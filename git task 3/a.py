@@ -37,8 +37,9 @@ for line in lines:
     d[From]+=mass
 
     if (not to in e.keys()):
-        e[to] = {"mass":0, "fuel":0}
+        e[to] = {"mass":0, "fuel":0, "count":0}
     e[to]["mass"]+=mass
+    e[to]["count"]+=1
     e[to]["fuel"]+=fuel
 
 x[prev_day] = mass_sum
@@ -55,8 +56,8 @@ print(len(e))
 max_fuel = 0
 max_fuel_name = 0
 for a, b in e.items():
-    if (b["fuel"] > max_fuel):
-        max_fuel = b["fuel"]
+    if (b["fuel"]/b["count"] > max_fuel):
+        max_fuel = b["fuel"]/b["count"]
         max_fuel_name = a
     print(a, b["mass"])
 
